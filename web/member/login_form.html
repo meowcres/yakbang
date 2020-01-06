@@ -1,0 +1,100 @@
+<?php
+include_once "../../_core/_init.php";
+include_once "../inc/top.php";
+include_once "../ad/ad_top.php";
+$__member_chk = "no_member";
+include_once "../_member.php";
+?>
+    <!-- 본문 시작 -->
+    <div class="container_wrap2">
+        <?php include_once "../inc/header.php"; ?>
+        <!-- container start -->
+        <div class="container">
+            <div class="content">
+
+                <div class="subsecNt gradientcolor">
+                    <div class="subsection_wrap">
+                        <div class="topimGsec">
+                            <img src="../images/subsecNtimg.png" alt="서브 상단 타이틀 이미지">
+                        </div>
+                    </div>
+                </div>
+                <div class="subsecNt">
+                    <div class="subsection_wrap">
+                        <div class="top_Location">
+                            <span>HOME</span>
+                            <span>LOGIN</span>
+                        </div>
+                        <div class="subhtit_wrap">
+                            <p class="topsuTxx">LOGIN</p>
+                            <h2>로그인</h2>
+                        </div>
+						<div class="loginAct_wrap">
+							<div class="loginBack">
+								<h2 class="toptxt">e약방에 오신것을 환영합니다.</h2>
+								<input type="text" name="log_id" id="log_id" class="login_box00" placeholder="아이디 입력">
+								<input type="password" name="log_pass" id="log_pass" class="login_box00" placeholder="비밀번호 입력">
+								<input type="button" class="login_box01" onclick="login()" value="로그인" title="로그인 버튼">
+								<input type="button" onclick="location.href='./member_register.html'" class="login_box01" value="회원가입" title="회원가입 버튼">
+								<!--<a href="" class="idpas_txt">아이디/비밀번호 찾기</a>-->
+							</div>
+						</div>                        
+                    </div>
+                </div>
+
+
+            </div>
+            <?php include_once "../inc/footer.php"; ?>
+        </div>
+    </div>
+
+<?php
+include_once "../inc/bottom.php";
+?>
+
+<script>
+    function login() {
+
+        if ($("#log_id").val() == "") {
+            alert("아이디를 입력 해 주세요");
+            $("#log_id").focus();
+            return false;
+        }
+        if ($("#log_pass").val() == "") {
+            alert("비밀번호를 입력 해 주세요");
+            $("#log_pass").focus();
+            return false;
+        }
+
+        var _frm = new FormData();
+
+        _frm.append("mode", "user_login");
+        _frm.append("log_id", $("#log_id").val());
+        _frm.append("log_pass", $("#log_pass").val());
+
+        $.ajax({
+            method: 'POST',
+            url: '../_action/login.do.php',
+            processData: false,
+            contentType: false,
+            data: _frm,
+            success: function (_res) {
+                //console.log(_res);
+                switch (_res) {
+                    case "100" :
+                        alert('로그인 성공');
+                        location.href='../mypage/user_information.html';
+                        break;
+
+                    case "200" :
+                        alert($("#log_id").val() + " 아이디는 로그인 할 수 없습니다");
+                        break;
+
+                    case "300" :
+                        alert("아이디, 비밀번호를 확인하여 주십시오!");
+                        break;
+                }
+            }
+        });
+    }
+</script>

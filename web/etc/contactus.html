@@ -1,0 +1,322 @@
+<?php
+include_once "../../_core/_init.php";
+include_once "../inc/top.php";
+include_once "../ad/ad_top.php";
+?>
+
+<!-- 본문 시작 -->
+<div class="container_wrap2">
+    <?php include_once "../inc/header.php"; ?>
+    <!-- container start -->
+    <div class="container">
+        <div class="content">
+
+            <body onload="Captcha();"> 
+               <div class="subsecNt gradientcolor">
+                    <div class="subsection_wrap">
+                        <div class="topimGsec">
+                            <img src="../images/subsecNtimg.png" alt="서브 상단 타이틀 이미지">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsecNt">
+                    <div class="subsection_wrap">
+                        <div class="top_Location">
+                            <span>HOME</span>
+                            <span>Contact Us</span>
+                        </div>
+
+                        <div class="subhtit_wrap">
+                            <p class="topsuTxx">ContactUs</p>
+                            <h2>문의하기</h2>
+                        </div>
+
+                        <div class="subincoNt">
+                            <form id="frm" name="frm" method="post" onSubmit="return chk_form(this)" action="../_action/contactus.do.php" target="actionForm" enctype="multipart/form-data">
+                                <input type="hidden" name="mode" value="send_cont">
+
+                                <table class="question_tbl" summary="분류,제목,내용으로 정의">
+                                    <caption>문의하기</caption>
+                                    <colgroup>
+                                        <col width="20%">
+                                        <col width="80%">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">
+                                                <label for="choice_inp">분류</label>
+                                            </th>
+                                            <td>
+                                                <select id="choice_inp" name="choice_inp">
+                                                <?php
+                                                $qry_type = "SELECT * FROM {$TB_CODE} WHERE CD_STATUS='y' AND CD_TYPE='REQUEST' ORDER BY ORDER_SEQ";
+                                                $res_type = $db->exec_sql($qry_type);
+                                                while ($row_type = $db->sql_fetch_array($res_type)) {
+                                                    $_selected = $row_type["CD_KEY"] == $_search["type"] ? "SELECTED" : "";
+                                                    ?>
+                                                    <option
+                                                    value="<?= $row_type["CD_KEY"] ?>" <?= $_selected ?>><?= clear_escape($row_type["CD_TITLE"]) ?></option><?
+                                                }
+                                                ?>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <th scope="row">
+                                                <label for="title_inp">제목</label>
+                                            </th>
+                                            <td>
+                                                <input type="text" id="title_inp" name="title_inp" value="">
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row">
+                                                <label for="title_name">이름</label>
+                                            </th>
+                                            <td>
+                                                <input type="text" id="title_name" name="title_name">
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <th scope="row">
+                                                <label for="title_phone">연락처</label>
+                                            </th>
+                                            <td>
+                                                <span class="hpArea">
+                                                    <select id="title_phone" name="title_phone">
+                                                    <?
+                                                    foreach($hp_array as $key=>$val){
+                                                      $selected =  $phone_obj[0] == $key ? "SELECTED" : "" ;
+                                                      ?><option value="<?=$val?>"><?=$val?></option><?
+                                                    }
+                                                    ?>
+                                                    </select>
+                                                    <em>-</em>
+                                                    <input type="tel" name="title_phone1" id="title_phone1" value="" maxlength="4">
+                                                    <em>-</em>
+                                                    <input type="tel" name="title_phone2" id="title_phone2" value="" maxlength="4">
+                                                </span>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <th scope="row">
+                                                <label for="title_emailID">이메일</label>
+                                            </th>
+                                            <td>
+                                                <span class="emailArea">
+                                                    <input type="text" id="title_emailID" name="title_emailID">
+                                                    <em>@</em>
+                                                    <input type="text" id="emailDomain" name="emailDomain">
+                                                    <select name="select" title="+ 선택" id="selectDomin" name="selectDomin" onChange="document.getElementById('emailDomain').value = this.value;">
+                                                        <option value=""> 직접입력 </option>
+                                                        <?php
+                                                        foreach ($email_array as $key => $val) {
+                                                          ?><option value="<?=$val?>"><?=$val?></option><?
+                                                        }
+                                                    ?>
+                                                    </select>
+                                                </span>
+
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <th scope="row">
+                                                <label for="info_inp">내용</label>
+                                            </th>
+                                            <td>
+                                                <textarea id="info_inp" name="info_inp" rows="5" cols="50"></textarea>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <th style='padding-left:20px; height:30px;'>자동완성방지
+
+                                            </th>
+                                            <td>
+                                               <div class="capt">
+                                                    <span class="captArea">
+                                                        <input type="text" id="mainCaptcha" readonly>
+                                                        <input type="button" id="refresh" onclick="Captcha();" value="새로보기">
+                                                    </span>
+                                                    <input type="text" id="txtInput">     
+                                               </div>
+
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table><br><br>
+
+
+                                  <div class="myinBx">
+
+                                    ○ 개인정보 수집 이용 목적: e약방 CONTACT US<br />
+                                    ○ 수집하는 개인정보의 항목: 이름,연락처,이메일<br />
+                                    ○ 개인정보 보유 및 이용기간: 회원 관리를 위해 일정기간 보관함<br />
+                                    ○ 제 3자 제공: e약방 CONTACT US 관리에 한해 개인정보를 제공하고 있습니다.<br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;- 정보제공 범위: e약방 CONTACT US 위해 수집한 개인정보 항목 일체<br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;- 정보제공 목적: e약방 CONTACT US 관리<br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;- 정보보유 및 이용기간: e약방 CONTACT US 유지 기간<br />
+                                    ○ 개인정보 수집 동의 거부권리 안내: 신청인은 본 개인정보 수집에 대한 동의를 거부하실 수 있습니다. <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;다만, 이 경우에는 e약방 CONTACT US로 신청이 불가능합니다.<br />
+                                    <br />
+                                    본인은 개인정보 처리에 관하여 고지 받았으며 이를 충분히 이해하고 동의합니다.<br /><br />
+
+
+                                      <div class="check_type">
+                                        <input type="checkbox" id="agree_1" name="agree_1" value="y">
+                                        <label for="agree_1"><b>개인정보 수집 이용동의서를 숙지하였으며 이에 동의합니다</b></label>
+                                      </div>
+                                  </div>
+
+
+                                <div class="btNwrap marTop45">
+                                    <!--<a href="" class="black">문의하기</a>-->
+                                    <input type="submit" class="black" value="문의하기">
+                                </div>
+                            </form>  
+                        </div>
+
+                    </div>              
+                </div>
+            </body>
+
+        </div>
+        <?php include_once "../inc/footer.php"; ?>
+    </div>
+</div>
+
+<script>
+function Captcha() {
+    var alpha = new Array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+                          'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', 
+                          '0','1','2','3','4','5','6','7','8','9');
+    var i;
+    for (i=0;i<6;i++) {
+        var a = alpha[Math.floor(Math.random() * alpha.length)];
+        var b = alpha[Math.floor(Math.random() * alpha.length)];
+        var c = alpha[Math.floor(Math.random() * alpha.length)];
+        var d = alpha[Math.floor(Math.random() * alpha.length)];
+        var e = alpha[Math.floor(Math.random() * alpha.length)];
+        var f = alpha[Math.floor(Math.random() * alpha.length)];
+        var g = alpha[Math.floor(Math.random() * alpha.length)];
+    }
+
+    var code = a + ' ' + b + ' ' + ' ' + c + ' ' + d + ' ' + e + ' '+ f + ' ' + g;
+
+    document.getElementById("mainCaptcha").innerHTML = code
+    document.getElementById("mainCaptcha").value = code
+}
+
+function removeSpaces(string) {
+    return string.split(' ').join('');
+}
+
+
+function chk_form(f) {
+    var userNum1 = $("#title_phone1").val();
+    var userNum2 = $("#title_phone2").val();
+    var chkNum = /^[0-9]+$/;
+
+    var userEmail = $("#title_emailID").val();
+    var userDomain = $("#emailDomain").val();
+    var chkEmail = /^[a-zA-Z0-9]+$/;
+    var chkDomain = /^[^((http(s?))\:\/\/)]([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$/;
+
+    
+    if($("#title_inp").val() == "") {
+        alert("제목을 입력해 주세요");
+        $("#title_inp").focus();
+        return false;
+    }
+
+    if($("#title_name").val() == "") {
+        alert("이름을 입력해 주세요.");
+        $("#title_name").focus();
+        return false;
+    }
+
+    if($("#title_phone1").val() == "") {
+        alert("전화번호를 입력해 주세요.");
+        $("#title_phone1").focus();
+        return false;
+    }
+
+    if(!chkNum.test(userNum1)) {
+        alert("숫자만 입력 가능합니다.");
+        $("#title_phone1").val("").focus();
+        return false;
+    }
+
+    if($("#title_phone2").val() == "") {
+        alert("전화번호를 입력해 주세요.");
+        $("#title_phone2").focus();
+        return false;
+    }
+
+    if(!chkNum.test(userNum2)) {
+        alert("숫자만 입력 가능합니다.");
+        $("#title_phone2").val("").focus();
+        return false;
+    }
+
+    if($("#title_emailID").val() == "") {
+        alert("이메일을 입력해 주세요.");
+        $("#title_emailID").focus();
+        return false;          
+    }
+
+    if(!chkEmail.test(userEmail)) {
+        alert("잘못된 이메일 형식입니다.");
+        $("#title_emailID").val("").focus();
+        return false; 
+    }
+
+    if($("#emailDomain").val() == "") {
+        alert("이메일을 입력해 주세요.");
+        $("#emailDomain").focus();
+        return false;          
+    }
+
+    if(!chkDomain.test(userDomain)) {
+        alert("잘못된 이메일 형식입니다.");
+        $("#emailDomain").val("").focus();
+        return false;
+    }
+
+    if($("#info_inp").val() == ""){
+        alert("내용을 입력해 주세요.");
+        $("#info_inp").focus();
+        return false;              
+    }
+
+
+    if($("input:checkbox[id='agree_1']").is(":checked") === false){
+        alert("개인정보 수집 이용동의를 승인해야 문의가 가능합니다.");
+        return false;
+    }
+
+    var string1 = removeSpaces(document.getElementById('mainCaptcha').value);
+    var string2 = removeSpaces(document.getElementById('txtInput').value);
+    if (string1 == string2) {
+        return true;
+    } else {        
+        alert("자동입력방지 문구를 입력해 주세요.");
+        return false;
+    }
+
+}
+</script>
+
+<?php
+include_once "../inc/bottom.php";
+

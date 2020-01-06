@@ -1,0 +1,92 @@
+<?php
+include_once "../../_core/_init.php";
+include_once "../inc/top.php";
+include_once "../ad/ad_top.php";
+
+if (isNull($_SESSION["member"]["id"])) {
+    alert_js("move", "", "../member/login_form.html");
+    exit;
+}
+
+?>
+    <!-- 본문 시작 -->
+    <div class="container_wrap2">
+        <?php include_once "../inc/header.php"; ?>
+        <!-- container start -->
+        <div class="container">
+            <div class="content">
+
+                <div class="subsecNt gradientcolor">
+                    <div class="subsection_wrap">
+                        <div class="topimGsec">
+                            <img src="../images/subsecNtimg.png" alt="서브 상단 타이틀 이미지">
+                        </div>
+                    </div>
+                </div>
+                <div class="subsecNt">
+                    <div class="subsection_wrap">
+                        <div class="top_Location">
+                            <span>HOME</span>
+                            <span>MYPAGE</span>
+                        </div>
+                        <div class="subhtit_wrap">
+                            <p class="topsuTxx">MYPAGE</p>
+                            <h2>회원정보</h2>
+                        </div>
+
+                        <table class="question_tbl">
+                            <caption>회원정보</caption>
+                            <colgroup>
+                                <col width="20%">
+                                <col width="80%">
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <th>아이디</th>
+                                <td>
+                                    <?= $_SESSION['member']['id'] ?>
+                                    <input type="button" id="logout" name="logout" value="로그아웃" onclick="actionForm.location.href='../_action/login.do.php?mode=logout'" style="float:right;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>이름</th>
+                                <td>
+                                    <?= $_SESSION['member']['name'] ?>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <p class="inf_exp00">※회원정보 수정은 App에서 가능합니다.</p>
+                        <p class="inf_exp01">전문약사로 신청을 하시려면 하단의 정보를 기입하여 신청하시기 바랍니다.</p>
+						<form method="post" action="../_action/mypage.do.php" enctype="multipart/form-data" target="actionForm">
+							<input type="hidden" id="mode" name="mode" value="member_pharmacist_register">
+							<table class="question_tbl">
+								<caption>약사신청</caption>
+								<colgroup>
+									<col width="20%">
+									<col width="80%">
+								</colgroup>
+								<tbody>
+								<tr>
+									<th>약사 No</th>
+									<td><input type="text" name="license_number" id="license_number"></td>
+								</tr>
+								<tr>
+									<th>File</th>
+									<td><input type="file" name="license_img" id="license_img"></td>
+								</tr>
+								</tbody>
+							</table>
+							<div class="infIndentBtn_wrap"><input type="submit" value="신청하기" class="infIndent_btn"></div>
+						</form>
+                    </div>
+                </div>
+                <br><br>
+            </div>
+            <?php include_once "../inc/footer.php"; ?>
+        </div>
+    </div>
+
+<?php
+include_once "../inc/bottom.php";

@@ -1,0 +1,2 @@
+<div style="text-align:center;color:#fff;background:#484848;width:300px;height:110px;margin:150px auto;padding-top:50px;border-radius:5px;">
+	<span style="font-weight:bold">사이트 현황 준비중<br /><br />...</div>

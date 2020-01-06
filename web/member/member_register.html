@@ -1,0 +1,406 @@
+<?php
+include_once "../../_core/_init.php";
+include_once "../inc/top.php";
+include_once "../ad/ad_top.php";
+?>
+    <!-- 본문 시작 -->
+    <div class="container_wrap2">
+        <?php include_once "../inc/header.php"; ?>
+        <!-- container start -->
+        <div class="container">
+            <div class="content">
+
+                <div class="subsecNt gradientcolor">
+                    <div class="subsection_wrap">
+                        <div class="topimGsec">
+                            <img src="../images/subsecNtimg.png" alt="서브 상단 타이틀 이미지">
+                        </div>
+                    </div>
+                </div>
+                <div class="subsecNt">
+                    <div class="subsection_wrap">
+                        <div class="top_Location">
+                            <span>HOME</span>
+                            <span>MEMBER</span>
+                        </div>
+                        <div class="subhtit_wrap">
+                            <p class="topsuTxx">MEMBER</p>
+                            <h2>회원가입</h2>
+                        </div>
+						<div class="subincoNt">
+							<table class="question_tbl">
+								<colgroup>
+									<col width="25%">
+									<col width="55%">
+									<col width="20%">
+								</colgroup>
+                                <input type="hidden" id="chk_id" name="chk_id" value="">
+								<tr>
+									<th><label for="user_id">이메일*</label></th>
+									<td><input type="text" id="user_id" name="user_id" placeholder="아이디 입력"></td>
+                                    <td><p class="validation" id="id_msg">이메일을 입력해주세요</p></td>
+								</tr>
+								<tr>
+									<th><label for="user_pass">비밀번호*</label></th>
+									<td colspan="2"><input type="password" id="user_pass" name="user_pass" placeholder="비밀번호 입력"></td>
+								</tr>
+								<tr>
+									<th><label for="re_pass">비밀번호 확인*</label></th>
+									<td><input type="password" id="re_pass" name="re_pass" placeholder="비밀번호를 한번 더 입력해주세요."></td>
+                                    <td><p class="validation" id="pass_msg">비밀번호를 입력해주세요</p></td>
+								</tr>
+								<tr>
+									<th><label for="reg_name">이름*</label></th>
+									<td colspan="2"><input type="text" id="user_name" name="user_name" placeholder="홍길동"></td>
+								</tr>
+								<tr>
+									<th><label for="reg_call">연락처*</label></th>
+									<td colspan="2">
+										<span class="hpArea">
+											<select id="phone1" name="phone1">
+												<option value="010">010</option>
+												<option value="011">011</option>
+												<option value="016">016</option>
+												<option value="017">017</option>
+												<option value="018">018</option>
+												<option value="019">019</option>
+												<option value="0130">0130</option>											
+											</select>
+											<em>-</em>
+											<input type="tel" name="phone2" id="phone2" value="" maxlength="4">
+											<em>-</em>
+											<input type="tel" name="phone3" id="phone3" value="" maxlength="4">
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="reg_call">생년월일</label></th>
+									<td colspan="2">
+										<span class="hpArea">	
+											<input type="text" name="birth_year" id="birth_year" value="" maxlength="4" placeholder="YYYY">
+											<em>/</em>
+											<input type="text" name="birth_month" id="birth_month" value="" maxlength="2" placeholder="MM">
+											<em>/</em>
+											<input type="text" name="birth_day" id="birth_day" value="" maxlength="2" placeholder="DD">
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<th>성별</th>
+									<td colspan="2">
+										<div class="radioGen_wrap">
+											<input type="radio" class="radio_gen" id="user_sex_m" name="user_sex" value="M" checked>
+											<label for="user_sex_m">남성</label>
+											<input type="radio" class="radio_gen" id="user_sex_f" name="user_sex" value="F">
+											<label for="user_sex_f">여성</label>
+										</div>
+									</td>
+								</tr>
+							</table>
+
+							<div class="myinBx">
+								<h4>이용약관 동의*</h4>
+								<p class="checkbox_wrap">
+									<input type="checkbox" id="all_chck" name="all_chck">
+									<label for="all_chck">모든 약관에 동의합니다.</label>
+								</p>
+								<p class="checkbox_wrap">
+									<input type="checkbox" id="inp_chk00" name="inp_chk00">
+									<label for="reg_check00">e약방 이용약관 동의<em>(필수)</em></label>
+									<a href="show_info01" class="detailsView showLayer">약관보기</a>
+								</p>
+								<p class="checkbox_wrap">
+									<input type="checkbox" id="inp_chk01" name="inp_chk01">>
+									<label for="reg_check01">개인정보 수집이용 동의<em>(필수)</em></label>
+									<a href="show_info00" class="detailsView showLayer">약관보기</a>
+								</p>
+								<p class="checkbox_wrap">
+									<input type="checkbox" id="inp_chk03" name="inp_chk03">
+									<label for="reg_check02">마케팅 정보 메일 SMS 수신동의<em>(선택)</em></label>
+								</p>
+							</div>
+							<div class="btNwrap marTop45">
+								<input type="button" onclick="chk_form();" class="black" value="회원가입">
+							</div>
+						</div>
+                    </div>
+                </div>
+
+
+            </div>
+            <?php include_once "../inc/footer.php"; ?>
+        </div>
+    </div>
+
+<?php
+include_once "../inc/bottom.php";
+?>
+<script>
+
+    $("#all_chck").click(function(){
+        if($("#all_chck").prop("checked")){
+            $("input[name=inp_chk00]").prop("checked",true);
+            $("input[name=inp_chk01]").prop("checked",true);
+            $("input[name=inp_chk02]").prop("checked",true);
+            $("input[name=inp_chk03]").prop("checked",true);
+        }else{
+            $("input[name=inp_chk00]").prop("checked",false);
+            $("input[name=inp_chk01]").prop("checked",false);
+            $("input[name=inp_chk02]").prop("checked",false);
+            $("input[name=inp_chk03]").prop("checked",false);
+        }
+    })
+
+    $("#user_id").keyup(function () {
+
+        if ($("#user_id").val().length >= 4) {
+
+            // 이메일 정규식
+            if ($("#user_id").val().length > 30) {
+                alert('이메일의 길이는 4~30자 내외 입니다.');
+                $("#id_msg").html("이메일을 입력하세요");
+                $("#user_id").val('');
+                $("#chk_id").val('');
+                return false;
+            }
+
+            // 이메일 형식 정규식
+            var email = $("#user_id").val();
+            //var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+            var filter = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+            if (!filter.test(email)) {
+                $("#id_msg").html("이메일 형식이 올바르지 않습니다.");
+                $("#chk_id").val('');
+                return false;
+            }
+
+
+            // 아이디 중복 체크하기 ( 실시간 메시지 띄우기 )
+            var user_id = $('#user_id').val();
+            var user_sex = $('input[name="user_sex"]:checked').val();
+            var _frm = new FormData();
+
+            _frm.append("mode", "double_check_id");
+            _frm.append("user_id", user_id);
+            _frm.append("user_sex", user_sex);
+
+            $.ajax({
+                method: 'POST',
+                url: "../_action/member.do.php",
+                processData: false,
+                contentType: false,
+                data: _frm,
+                success: function (_res) {
+                    console.log(_res);
+                    switch (_res) {
+                        case "200" :
+                            $("#id_msg").html("사용 가능한 이메일 입니다");
+                            $("#chk_id").val(user_id);
+                            break;
+
+                        case "300" :
+                            $("#id_msg").html("이미 사용중인 이메일 입니다");
+                            $("#chk_id").val('');
+                            break;
+
+                        case "400" :
+                            alert("이메일의 첫글자는 영문이어야 합니다");
+                            $("#id_msg").html("이메일을 확인하여 주세요");
+                            $("#user_id").val('');
+                            $("#chk_id").val('');
+                            break;
+                    }
+                }
+            });
+        }
+    });
+
+    // 비밀번호 체크 메시지 띄우기
+    $("#re_pass").keyup(function () {
+
+        if ($("#re_pass").val().length >= 6) {
+
+            var user_pass = $('#user_pass').val();
+            var re_pass = $('#re_pass').val();
+
+            if (user_pass.length < 6) {
+                $("#pass_msg").html("비밀번호가 너무 짧습니다");
+                $("#user_pass").val('');
+                return false;
+            }
+            if (user_pass == re_pass) {
+                $("#pass_msg").html("비밀번호가 일치합니다");
+            } else {
+                $("#pass_msg").html("비밀번호가 일치하지 않습니다");
+            }
+        }
+    });
+
+    function chk_form() {
+
+        var email = $("#user_id").val();
+        var filter = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        if (!filter.test(email)) {
+            alert("이메일 형식이 올바르지 않습니다.");
+            $("#id_msg").html("이메일 형식이 올바르지 않습니다.");
+            $("#user_id").focus();
+            return false;
+        }
+        if ($("#chk_id").val() == "") {
+            alert("이메일을 확인해 주세요");
+            $("#user_id").focus();
+            return false;
+        }
+        if ($("#user_id").val() == "") {
+            alert("이메일을 입력해 주세요");
+            $("#user_id").val('');
+            $("#user_id").focus();
+            return false;
+        }
+        var user_pass = $("#user_pass").val();
+        var re_pass = $("#re_pass").val();
+        if (user_pass == "") {
+            alert("비밀번호를 입력 해 주십시오");
+            $("#user_pass").val('');
+            $("#user_pass").focus();
+            return false;
+        }
+        if (user_pass != re_pass) {
+            alert("비밀번호가 일치하지 않습니다. \n\n비밀번호를 확인 해 주세요");
+            $("#user_pass").focus();
+            return false;
+        }
+        if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/.test(user_pass)) {
+            alert('비밀번호는 영문자와 숫자, 특수문자 조합으로 \n\n8~20자리를 사용해야 합니다.');
+            $("#user_pass").val('');
+            $("#user_pass").focus();
+            return false;
+        }
+        var chk_num = user_pass.search(/[0-9]/g);
+        var chk_eng = user_pass.search(/[a-z]/ig);
+        if (chk_num < 0 || chk_eng < 0) {
+            alert('비밀번호는 숫자와 영문자를 혼용하여야 합니다.');
+            $("#user_pass").val('');
+            $("#user_pass").focus();
+            return false;
+        }
+        if (/(\w)\1\1\1/.test(user_pass)) {
+            alert('비밀번호에 같은 문자를 4번 이상 사용하실 수 없습니다.');
+            $("#user_pass").val('');
+            $("#user_pass").focus();
+            return false;
+        }
+        if ($("#user_name").val() == "") {
+            alert("이름을 입력해 주세요");
+            $("#user_name").focus();
+            return false;
+        }
+        if ($("#phone2").val() == "") {
+            alert("연락처를 입력해 주세요");
+            $("#phone2").focus();
+            return false;
+        }
+        if ($("#phone3").val() == "") {
+            alert("연락처를 입력해 주세요");
+            $("#phone3").focus();
+            return false;
+        }
+        if ($("#birth_year").val() == "") {
+            alert("생년월일을 입력해 주세요");
+            $("#birth_year").focus();
+            return false;
+        }
+        var birth_year = $("#birth_year").val();
+        if (!/^[0-9]+$/.test(birth_year)) {
+            alert("생년월일은 숫자만 입력 가능합니다.");
+            $("#birth_year").val('');
+            $("#birth_year").focus();
+            return false;
+        }
+        if ($("#birth_month").val() == "") {
+            alert("생년월일을 입력해 주세요");
+            $("#birth_month").focus();
+            return false;
+        }
+        var birth_month = $("#birth_month").val();
+        if (!/^[0-9]+$/.test(birth_month)) {
+            alert("생년월일은 숫자만 입력 가능합니다.");
+            $("#birth_month").val('');
+            $("#birth_month").focus();
+            return false;
+        }
+        if ($("#birth_day").val() == "") {
+            alert("생년월일을 입력해 주세요");
+            $("#birth_day").focus();
+            return false;
+        }
+        var birth_day = $("#birth_day").val();
+        if (!/^[0-9]+$/.test(birth_day)) {
+            alert("생년월일은 숫자만 입력 가능합니다.");
+            $("#birth_day").val('');
+            $("#birth_day").focus();
+            return false;
+        }
+
+        if ($('input[name="user_sex"]').is(":checked") != true) {
+            alert("성별을 체크해 주세요.");
+            return false;
+        }
+
+        if ($('input:checkbox[id="inp_chk00"]').is(":checked") != true) {
+            alert("이용약관을 동의하여 주십시오");
+            return false;
+        }
+        if ($('input:checkbox[id="inp_chk01"]').is(":checked") != true) {
+            alert("개인정보 수집에 동의하여 주십시오");
+            return false;
+        }
+
+        // 회원가입 폼 보내기
+        var chk_id = $('#chk_id').val();
+        var user_pass = $('#user_pass').val();
+        var user_name = $('#user_name').val();
+        var phone1 = $('#phone1').val();
+        var phone2 = $('#phone2').val();
+        var phone3 = $('#phone3').val();
+        var birth_year = $('#birth_year').val();
+        var birth_month = $('#birth_month').val();
+        var birth_day = $('#birth_day').val();
+        var user_sex = $('input[name="user_sex"]:checked').val();
+
+        var _frm = new FormData();
+
+        _frm.append("mode", "member_add");
+        _frm.append("chk_id", chk_id);
+        _frm.append("user_pass", user_pass);
+        _frm.append("user_name", user_name);
+        _frm.append("phone1", phone1);
+        _frm.append("phone2", phone2);
+        _frm.append("phone3", phone3);
+        _frm.append("birth_year", birth_year);
+        _frm.append("birth_month", birth_month);
+        _frm.append("birth_day", birth_day);
+        _frm.append("user_sex", user_sex);
+
+        $.ajax({
+            method: 'POST',
+            url: "../_action/member.do.php",
+            processData: false,
+            contentType: false,
+            data: _frm,
+            success: function (_res) {
+                console.log(_res);
+                switch (_res) {
+                    case "1" :
+                        alert("회원가입에 성공하였습니다.");
+                        location.href = "../mypage/user_information.html";
+                        break;
+                    default :
+                        //alert("실패");
+                        alert(_res);
+                        break;
+                }
+            }
+        });
+    }
+</script>

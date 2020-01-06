@@ -1,0 +1,61 @@
+@charset "utf-8";
+
+html { overflow-y:auto;}
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,hr,form,fieldset,legend,input,textarea,caption,button,p,th,td,figure,figcaption {margin:0; padding:0; word-wrap:break-word; white-space:normal;}
+html,body {width:100%; height:100%;}
+body {-webkit-overflow-scrolling:touch; font-family: 'NanumBarunGothic', sans-serif; color:#555; font-size:16px; line-height:1; font-weight:300; 
+-webkit-text-size-adjust: 100%;
+-moz-text-size-adjust: 100%;
+-ms-text-size-adjust: 100%;
+}
+article,aside,figcaption,figure,footer,header,main,nav,section{display:block;}
+audio,canvas,video{display:inline-block;}
+audio:not([controls]){display:none;height:0;}
+li {list-style:none;}
+img, fieldset {border:0 none;}
+img {vertical-align:top;}
+legend, hr {display:none;}
+legend {position:absolute; top:0; left:0; width:0; height:0; display:block; overflow:hidden; visibility:hidden; font-size:0; line-height:0;}
+input, textarea {font-size:100%; color:#555; background:transparent;}
+button {border:0 none; background:transparent; padding:0; margin:0;}
+em, address {font-style:normal;}
+table {border-spacing:0; border-collapse:collapse; width:100%;}
+caption {font-size: 0; line-height: 0; width:0; height:0; text-indent:-1000px; overflow: hidden;}
+a, a:link, a:visited {text-decoration:none; color:#555;}
+a:hover, a:active {text-decoration:none;}
+a,input{-webkit-tap-highlight-color:transparent;}
+textarea {border:none; width:100%; font-size:100%;}
+input,textarea,select {font-family:inherit; box-sizing:border-box; font-size:inherit;color:inherit;border-radius:0;}
+input[type="button"], input[type="submit"] {border:0; padding:0px; margin:0px; cursor:pointer; appearance:none; -webkit-appearance: none; -webkit-border-radius:0; border-radius:0;}
+input[type="text"], input[type="password"], input[type="email"], input[type="number"], 
+input[type="tel"], input[type="search"], input[type="date"] {border:0; line-height:0; box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; width:100%;}
+select {width:100%; box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box;}
+* {box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box;}
+
+/* pharmacy_login */
+.pharmacist_wrap {position:relative; height:100%;}
+.pharmacist_wrap .pharmform {position:absolute; width:740px; padding:15px; background:url('../img/arrow_bg.png')repeat; top:50%; left:50%; transform:translate(-50%, -50%);}
+.pharmacist_wrap .pharmform .pharmBck {background:#fff; padding:20px; border:1px solid #ccc;}
+.pharmacist_wrap .pharmform .pharmBck:after {content:""; height:0; display:block; clear:both;}
+.pharmBck .inpharmboxA {float:left; width:60%; padding-right:10px; position:relative; min-height:420px;}
+.pharmBck .inpharmboxA .logoimg {width:140px; margin:20px 0 40px;}
+.pharmBck .inpharmboxA .logoimg img {max-width:100%;}
+.pharmBck .inpharmboxA span {display:block;}
+.pharmBck .inpharmboxA span + span {margin:15px 0 15px;}
+.pharmBck .inpharmboxA span label, .pharmBck .inpharmboxA span input {display:block;}
+.pharmBck .inpharmboxA span label {font-size:12px; margin-bottom:3px; font-weight:500;}
+.pharmBck .inpharmboxA span input {height:42px; border:1px solid #2DDBA0; padding:0 10px;}
+.pharmBck .inpharmboxA input[type="submit"] {height:42px; background:#2DDBA0; color:#fff; text-align:center; width:100%; margin-top:20px;}
+.pharmBck .inpharmboxA a {font-size:14px; font-weight:500; margin-top:15px; display:block;}
+.pharmBck .inpharmboxB {float:left; width:40%; padding-left:10px; overflow:hidden;}
+.pharmBck .inpharmboxB img {max-height:100%; width:100%;}
+.pharmBck .inpharmboxA .chkbx {margin-top:15px;}
+.pharmBck .inpharmboxA .chkbx input, .pharmBck .inpharmboxA .chkbx label {display:inline-block; vertical-align:middle;}
+.pharmBck .inpharmboxA .chkbx label {font-size:12px; font-weight:500; margin-left:5px;}
+
+.inphartxx {line-height:32px; font-size:16px; font-weight:500; color:#999;}
+.inphartxx em {color:#000;}
+.inpharselect {margin-top:45px;}
+.inpharselect label {display:block; margin-bottom:5px; font-size:16px; font-weight:500;}
+.inpharselect select {height:42px;}
+.verTxx {position:absolute; bottom:0; right:10px; font-size:14px; font-weight:500;}

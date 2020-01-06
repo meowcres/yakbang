@@ -1,0 +1,84 @@
+/* input readonly 구분, select disabled 구분 */
+#popup{margin:0 auto; padding:10px;}
+#popup .readonly{background:#f5f5f5}
+#popup input:disabled{background:#f5f5f5}
+#popup select:disabled{background:#f5f5f5}
+
+/* 타이틀 */
+#popup .h3_title{position:relative; color:#333; font-weight:700; font-size:16px; padding-left:15px; margin-bottom:20px;}
+#popup .h3_title:before{content:''; position:absolute; top:50%; left:0; width:2px; height:14px; margin-top:-7px; background:#ef4131;}
+#popup .h3_title .txt{font-size:12px; display:inline-block; position:absolute; top:4px; right:0; font-weight:400}
+
+/* table style */
+/* BBs Table */
+#popup table, table.tbl1 {
+    width: 100%;
+    border-top: 2px solid #666;
+    border-bottom: 2px solid #666;
+    border-collapse: collapse;
+    margin: 5px 0 5px 0;
+}
+
+#popup table th, table.tbl1 th {
+    background: #f7f7f7;
+    padding: 5px;
+    font-weight: bold;
+    border: 1px solid #999;
+	vertical-align:middle;
+}
+
+#popup table td, table.tbl1 td {
+    background: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: left;
+	vertical-align: middle;
+}
+
+#popup table td a:link, #popup table td a:visited, table.tbl1 td a:link, table.tbl1 td a:visited {
+    text-decoration: none;
+    color: #494949;
+}
+
+#popup table td a:active, #popup table td a:hover, table.tbl1 td a:active, table.tbl1 td a:hover {
+    text-decoration: underline;
+    color: #494949;
+}
+/*#Contents table td div { margin:10px; min-height:360px; text-align:left; }*/
+#popup table td textarea.Reply_Text {
+    overflow: auto;
+    width: 98%;
+    height: 42px;
+    padding: 5px;
+}
+
+/* 페이징 */
+#popup .b_page_no{text-align:center;}
+#popup .b_page_no a{display:inline-block; min-width:29px; height:29px; line-height:29px; text-align:center; margin:0 1px; vertical-align:middle; border:1px solid #e5e5e5; color:#666;}
+#popup .b_page_no a.on{color:#fff; font-weight:700; background:#2994f7}
+
+/* button style 기본 */
+#popup .btn_area{padding-bottom:50px; overflow:hidden;}
+#popup .btn{display:inline-block; line-height:28px; padding:0 15px;}
+#popup .btn_s{display:inline-block; line-height:22px; font-size:12px; border-radius:3px; padding:0 8px}
+#popup .btn_b{display:inline-block; line-height:50px; font-size:15px; width:160px; text-align:center;}
+#popup .btn_big{display:inline-block; padding:0 15px;}
+
+#popup .btn01{background-color:#a5a5a8; color:#fff; border:1px solid #a5a5a8}
+#popup .btn02{background-color:#757577; color:#fff; border:1px solid #757577}
+#popup .btn03{background-color:#39383a; color:#fff; border:1px solid #39383a;}
+#popup .btn04{background-color:#f74129; color:#fff; border:1px solid #f74129;}
+#popup .btn05{background-color:#fff; color:#f49a24; border:1px solid #f49a24;}
+#popup .btn06{background-color:#fff; color:#f72929; border:1px solid #f72929;}
+#popup .btn07{background-color:#fff; color:#2994f7; border:1px solid #2994f7;}
+#popup .btn08{background-color:#fff; color:#51c33a; border:1px solid #51c33a;}
+#popup .btn09{background-color:#fff; /*color:#a5a5a8;*/color:#666; border:1px solid #a5a5a8}
+#popup .btn10{background-color:#fff; color:#757577; border:1px solid #757577}
+#popup .btn11{background-color:#fff; color:#39383a; border:1px solid #39383a;}
+#popup .btn12{background-color:#fff; color:#f74129; border:1px solid #f74129;}
+#popup .btn13{background-color:#f49a24; color:#fff; border:1px solid #f49a24;}
+#popup .btn14{background-color:#f72929; color:#fff; border:1px solid #f72929;}
+#popup .btn15{background-color:#2994f7; color:#fff; border:1px solid #2994f7;}
+#popup .btn16{background-color:#51c33a; color:#fff; border:1px solid #51c33a;}
+#popup .btn20{background-color:#61121f; color:#fff; border:1px solid #61121f;}
+#popup .btn21{background-color:#F5A720; color:#fff; border:1px solid #F5A720;}

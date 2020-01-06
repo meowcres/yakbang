@@ -1,0 +1,190 @@
+
+.anythingSlider-metallic {
+	margin: 0 auto;
+	/* 23px right & left padding for the navigation arrows */
+	padding: 0;
+}
+/* Navigation buttons + start/stop button, default state */
+.anythingSlider-metallic .anythingControls a {
+	width:8px;
+	height:8px;
+	background: transparent url(../images/main/gallery_pager.png) no-repeat left bottom;
+
+}
+
+/* slider window - top & bottom borders, active state */
+.anythingSlider-metallic.activeSlider .anythingWindow {
+	border:none;
+}
+
+
+/* Navigation current button, active state */
+.anythingSlider-metallic.activeSlider .anythingControls a.cur,
+.anythingSlider-metallic.activeSlider .anythingControls a:hover {
+	background-position: left top;
+}
+
+
+.anythingSlider-metallic .arrow {
+	top:50%;
+	position: absolute;
+	margin:-40px 0 0 0;
+	display: block;
+	z-index: 100;
+}
+
+.anythingSlider-metallic .arrow a {
+	display: block;
+	width: 74px;
+	height: 158px;
+	margin: 0 0 0 0; /* half height of image */
+	text-align: center;
+	outline: 0;
+	background: url(../images/main/gallery_nav.png) no-repeat;
+}
+
+/* back arrow */
+.anythingSlider-metallic .back { left: 0px; }
+.anythingSlider-metallic .back a { background-position: left top; }
+.anythingSlider-metallic .back a:hover,
+.anythingSlider-metallic .back a.hover { background-position: left bottom; }
+/* forward arrow */
+.anythingSlider-metallic .forward { right: 0px; }
+.anythingSlider-metallic .forward a { background-position: right top; }
+.anythingSlider-metallic .forward a:hover,
+.anythingSlider-metallic .forward a.hover { background-position: right bottom; }
+
+/* Navigation Links */
+.anythingSlider-metallic .anythingControls {
+	height: 8px; /* limit height, needed for IE9 of all things */
+	outline: 0;
+	display: none;
+	text-align:center;
+	position: relative;
+	bottom: -18px;
+	left: 0;
+	margin: 0;
+	z-index: 100;
+}
+
+.anythingSlider-metallic .anythingControls ul {
+	margin: 0;
+	padding: 0;
+}
+.anythingSlider-metallic .anythingControls ul li {
+	list-style: none;
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+.anythingSlider-metallic .anythingControls ul a {
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	margin: 0 3px;
+	padding: 0;
+	text-decoration: none;
+	text-align: center;
+	outline: 0;
+}
+
+.anythingSlider-metallic .anythingControls span {
+	display: block;
+	visibility: hidden;
+}
+
+/* navigationSize window */
+.anythingSlider-metallic .anythingControls .anythingNavWindow {
+	overflow: hidden;
+	float: left;
+}
+
+
+/* Autoplay Start/Stop button */
+.anythingSlider-metallic .anythingControls .start-stop {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	margin: 3px;
+	padding: 0;
+	text-align:left;
+	text-decoration: none;
+	z-index: 100;
+}
+
+/***********************
+IE8 AND OLDER STYLING
+***********************/
+/* Navigation Arrows */
+.as-oldie .anythingSlider-metallic .arrow {
+	top: 40%;
+}
+.as-oldie .anythingSlider-metallic .arrow a {
+	margin: 0;
+}
+
+/***********************
+  COMMON SLIDER STYLING
+ ***********************/
+/* Overall Wrapper */
+.anythingSlider {
+	display: block;
+	overflow: visible !important;
+	position: relative;
+}
+/* anythingSlider viewport window */
+.anythingSlider .anythingWindow {
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+/* anythingSlider base (original element) */
+.anythingSlider .anythingBase {
+	background: transparent;
+	list-style: none;
+	position: absolute;
+	overflow: visible !important;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+}
+
+/* Navigation arrow text; indent moved to span inside "a", for IE7;
+	apparently, a negative text-indent on an "a" link moves the link as well as the text */
+.anythingSlider .arrow span {
+	display: block;
+	visibility: hidden;
+}
+/* disabled arrows, hide or reduce opacity: opacity: .5; filter: alpha(opacity=50); */
+.anythingSlider .arrow.disabled {
+	display: none;
+}
+/* all panels inside the slider; horizontal mode */
+.anythingSlider .panel {
+	background: transparent;
+	display: block;
+	overflow: hidden;
+	float: left;
+	padding: 0;
+	margin: 0;
+}
+/* vertical mode */
+.anythingSlider .vertical .panel {
+	float: none;
+}
+
+/* fade mode */
+.anythingSlider .fade .panel {
+	float: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 0;
+}
+/* fade mode active page - visible & on top */
+.anythingSlider .fade .activePage {
+	z-index: 1;
+}
+

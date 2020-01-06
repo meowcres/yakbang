@@ -1,0 +1,296 @@
+<?php
+include_once "../../_core/_init.php";
+include_once "../inc/top.php";
+include_once "../ad/ad_top.php";
+
+	$qry_001  = " SELECT t1.*, t2.PHYSICAL_NAME ";
+	$qry_001 .= " FROM {$TB_AD} t1 ";
+	$qry_001 .= " LEFT JOIN {$TB_ATTECH_FILES} t2 ON (t1.AD_CODE = t2.REFERENCE_CODE) ";
+    $qry_001 .= " WHERE AD_STATUS = 'y' AND AD_TYPE = '2' ";
+    $qry_001 .= " ORDER BY t1.IDX DESC ";
+	$res_001  = $db->exec_sql($qry_001);
+	
+
+?>
+<!-- 본문 시작 -->
+<div class="container_wrap">
+  <?php include_once "../inc/header.php"; ?>
+
+  <!-- container start -->
+  <div class="container">
+    <div class="content">
+
+      <!-- slide start-->
+      <div class="slideSetion">
+        <div class="section_wrap">
+          <div class="main_slide">
+            <div class="swiper-wrapper">
+<?php
+    while($row_001  = $db->sql_fetch_array($res_001)){
+?>
+      <div class="swiper-slide">
+        <div class="swiper_txt">
+          <h2 class="transition"><?=$row_001["AD_TITLE"]?></h2>
+          <p class="subtxx transition">
+            <?=$row_001["AD_TXT_1"]?><br/>
+            <?=$row_001["AD_TXT_2"]?><br/>
+            <br/>
+          </p>
+          <a href='<?=$row_001["AD_LINK"]?>' class="linkBox"><?=$row_001["AD_TXT_3"]?><br/></a>
+        </div>
+        <div class="swiper_img">
+          <span class="swiper_width">
+            <img src="../../_core/_files/ad/<?=$row_001["PHYSICAL_NAME"]?>" alt="<?=$row_001["AD_TITLE"]?>">
+          </span>
+        </div>
+      </div>
+<?
+    }
+?>
+          </div>
+
+          <div class="main_snav">
+            <div class="stop_play stopSlide_btn">
+              <a href="javascript:void(0)" class="" title="슬라이드 이미지 멈춤과 시작">stop</a>
+            </div>
+            <ol class="main_nav">
+              <li>1</li>
+              <li>2</li>
+              <li>3</li>
+            </ol>
+          </div>
+
+        </div>
+      </div>
+      <!-- slide end-->
+
+    </div>
+    
+    <section class="coNtop">	
+      <h2 class="nonTx">e약방의 현황</h2>
+      <div class="section_wrap">
+        <ul>
+          <li>
+            <div class="imgico"><img src="../images/memicon.png" alt="약방 회원수 아이콘"></div>
+            <div class="imgTTX">
+              <p class="tit">약방 회원수</p>
+              <p class="num">
+                <em class="counter">17,045</em> 명
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="imgico"><img src="../images/prescriptionicon.png" alt="약방 처방전 아이콘"></div>
+            <div class="imgTTX">
+              <p class="tit">약방 처방전</p>
+              <p class="num">
+                <em class="counter">202,332</em> 건
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="imgico"><img src="../images/pharmacyicon.png" alt="제휴 약국입점수 아이콘"></div>
+            <div class="imgTTX">
+              <p class="tit">제휴 약국입점수</p>
+              <p class="num">
+                <em class="counter">5,443</em> 입점
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+				<section class="char_wrap">
+					<h2>e약방만의 특징</h2>
+					<div class="section_wrap">
+						<div class="charBx">
+							<ul>
+								<li class="bgcolor1">
+									<div class="onetype">
+										<div class="tanslate">
+											<p>병원 진료 후<br>처방조제시간 단축!!</p>
+											<div class="imgArea">
+												<img src="../images/charBx00.png" alt="병원 진료 후 처방조제시간 단축이미지">
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="bgcolor2">
+									<div class="twotype">
+										<div class="tanslate">
+											<div class="imgArea">
+												<img src="../images/charBx01.png" alt="주변약국 표시로 조제약국 선택권 확대이미지">
+											</div>
+											<p>주변약국 표시로<br>조제약국 선택권 확대</p>
+										</div>
+									</div>
+								</li>
+								<li class="bgcolor3">
+									<div class="twotype">
+										<div class="tanslate">
+											<p>조제료 수익증대</p>
+											<div class="imgArea">
+												<img src="../images/charBx02.png" alt="조재료 수익증대이미지">
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="bgcolor4">
+									<div class="onetype">
+										<div class="tanslate">
+											<div class="imgArea">
+												<img src="../images/charBx03.png" alt="타켓 마케팅 및 홍보가능이미지">
+											</div>
+											<p>타켓 마케팅 및 홍보가능</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+
+							<ul>
+								<li class="bgcolor4">
+									<div class="onetype">
+										<div class="tanslate">
+											<p>온라인 멘토링<br>심층 복양상담 가능</p>
+											<div class="imgArea">
+												<img src="../images/charBx04.png" alt="온라인 멘토링 심층 복양지도 가능이미지">
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="bgcolor3">
+									<div class="twotype">
+										<div class="tanslate">
+											<div class="imgArea">
+												<img src="../images/charBx05.png" alt="전자복약지도서 SNS발송으로 가독성 및 효율성 증대이미지">
+											</div>
+											<p>전자복약지도서 SNS발송으로<br>가독성 및 효율성 증대</p>
+										</div>
+									</div>
+								</li>
+								<li class="bgcolor2">
+									<div class="twotype">
+										<div class="tanslate">
+											<p>잠재적 단골 고객확보를<br>약속해요</p>
+											<div class="imgArea">
+												<img src="../images/charBx06.png" alt="잠재적 고객확보를 약속해요이미지">
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="bgcolor1">
+									<div class="onetype">
+										<div class="tanslate">
+											<div class="imgArea">
+												<img src="../images/charBx07.png" alt="조제편의성 제공으로 타 병원과의 차별성 부각이미지">
+											</div>
+											<p>모바일 접수 결제로<br>조제 편의성 제공</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+
+				<section class="movieWrap">
+					<h2 class="nonTx">동영상</h2>
+					<div class="video_wrap">
+						<video autoplay loop id="myVideo">
+							<!--source src="../movie/bns_movie.mp4" type="video/mp4"-->
+						</video>
+					</div>
+				</section>
+
+				<section class="noticewrap">
+					<div class="section_wrap">
+						<h2 class="nonTx">NOTICE</h2>
+						<div class="inNoBwrap">
+							<div class="inimg">
+								<img src="../images/mobile_img.png" alt="모바일 이미지">
+							</div>
+							<ul>
+								<li>
+									<h3>공지사항</h3>
+									<p>국내최초 약국 플랫폼 선두주자 e약방이 새롭게 오픈했습니다.</p>
+									<p>e약방에서 제공되는 모든 서비스를 맘껏 누려보세요</p>
+									<a href="../community/notice.html" class="inlink">자세히 보기</a>
+								</li>
+								<li>
+									<h3>사용후기</h3>
+									<p>국내최초 약국 플랫폼 선두주자 e약방이 새롭게 오픈했습니다.</p>
+									<p>e약방에서 제공되는 모든 서비스를 맘껏 누려보세요</p>
+									<a href="" class="inlink">자세히 보기</a>
+								</li>
+								<li>
+									<h3>건의사항</h3>
+									<p>국내최초 약국 플랫폼 선두주자 e약방이 새롭게 오픈했습니다.</p>
+									<p>e약방에서 제공되는 모든 서비스를 맘껏 누려보세요</p>
+									<a href="../etc/contactus.html" class="inlink">자세히 보기</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+
+
+
+				<section class="faqwrap">
+					<div class="section_wrap">
+						<h2>FAQ</h2>
+						<ul class="slideMenu">
+            <?php
+            $faq_qry  = " SELECT t1.*, t2.CD_TITLE ";
+            $faq_qry .= " FROM {$TB_FAQ} t1 ";
+            $faq_qry .= " LEFT JOIN {$TB_CODE} t2 ON (t1.F_TYPE = t2.CD_KEY) ";
+            $faq_qry .= " WHERE F_STATUS in ('y') ORDER BY ORDER_SEQ LIMIT 0, 5"; 
+
+            $faq_res  = $db->exec_sql($faq_qry);
+            while($faq_row = $db->sql_fetch_array($faq_res)){
+
+              $f_question = clear_escape($faq_row["F_QUESTION"]);
+              $f_answer = nl2br(clear_escape($faq_row["F_ANSWER"]));
+
+              ?>
+              <li>
+								<a href="javascript:void(0);" class="showclick">[ <?= $faq_row["CD_TITLE"] ?> ] <?= $f_question ?></a>
+								<div class="showDiv">
+									<?= $f_answer ?>
+								</div>
+							</li>
+              <?
+            }
+            ?>
+						</ul>
+					</div>
+				</section>
+
+
+
+
+				<div class="bmobile">
+					<div class="download_wrap">
+						<div class="mblogo">
+							<img src="../images/mlogo.png" alt="EP e약방 로고">
+						</div>
+						<p>국내 최초 온라인 약국 플랫폼</p>
+						<span><em>e</em>약방앱 다운로드</span>
+						<div class="downlink">
+							<a href="/Web_Files/apk/app-release.apk"><img src="../images/googleicon.png" alt="Google Play icon"></a>
+							<!--a href=""><img src="../images/appicon.png" alt="Google Play icon"></a-->
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+    <?php include_once "../inc/footer.php"; ?>
+  </div>
+</div>
+
+<?php
+include_once "../inc/bottom.php";

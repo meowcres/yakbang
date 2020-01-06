@@ -1,0 +1,87 @@
+<?php
+include_once "../../_core/_init.php";
+include_once "../inc/top.php";
+include_once "../ad/ad_top.php";
+
+$search["type"] = $_REQUEST["search_type"];
+
+$page = $_REQUEST["page"];
+
+$idx = $_REQUEST["idx"] ;
+
+$qry_001 = "SELECT * FROM {$TB_NOTICE} WHERE IDX='{$idx}'" ;
+$res_001 = $db->exec_sql($qry_001);
+$row_001 = $db->sql_fetch_array($res_001);
+?>
+<!-- 본문 시작 -->
+<div class="container_wrap2">
+    <?php include_once "../inc/header.php"; ?>
+    <!-- container start -->
+    <div class="container">
+        <div class="content">
+			
+			<div class="subsecNt gradientcolor">
+				<div class="subsection_wrap">
+					<div class="topimGsec">
+						<img src="../images/subsecNtimg.png" alt="서브 상단 타이틀 이미지">
+					</div>
+				</div>
+			</div>
+			<div class="subsecNt">
+				<div class="subsection_wrap">
+					<div class="top_Location">
+						<span>HOME</span>
+						<span>NOTICE</span>
+					</div>
+					<div class="subincoNt noticeView">
+						<h2>
+							<?= clear_escape($row_001["N_TITLE"]) ?>
+							<span><?= $row_001["REG_DATE"] ?></span>
+						</h2>
+						<div class="innercoNt">
+							<?= nl2br(clear_escape($row_001["N_CONTENTS"])) ?>
+						</div>
+
+
+						<div class="preVnext">
+                            <?php
+                            $pre_qry = "SELECT Max(idx) FROM {$TB_NOTICE} WHERE idx < '{$idx}' " ;
+                            $pre_res = $db->exec_sql($pre_qry);
+                            $pre_row = $db->sql_fetch_row($pre_res);
+
+                            if ($pre_row[0] > 0) {
+                              ?><a href="./notice_view.html?idx=<?= $pre_row[0] ?>&search_type=<?= $search["type"] ?>" class="prevBtn">이전글</a><?
+                            } else{
+                              ?><a href="javascript:void(0);" onClick="alert('처음 글입니다');" class="prevBtn">이전글</a><?
+                            }
+                            ?>
+
+                            <?php
+                            $next_qry = "SELECT Min(idx) FROM {$TB_NOTICE} WHERE idx > '{$idx}' " ;
+                            $next_res = $db->exec_sql($next_qry);
+                            $next_row = $db->sql_fetch_row($next_res);
+                            
+                            if($next_row[0] > 0) {
+                                ?><a href="./notice_view.html?idx=<?= $next_row[0] ?>&search_type=<?= $search["type"] ?>" class="nextBtn">다음글</a><?
+                            } else {
+                                ?><a href="javascript:void(0);" onClick="alert('마지막 글입니다');" class="nextBtn">다음글</a><?
+                            }
+                            ?>
+						</div>
+
+
+						<div class="btNwrap">
+							<a href="./notice.html?search_type=<?= $search["type"] ?>&page=<?=$page?>" class="black">목록으로</a>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+
+        </div>
+        <?php include_once "../inc/footer.php"; ?>
+    </div>
+</div>
+
+<?php
+include_once "../inc/bottom.php";

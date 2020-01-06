@@ -1,0 +1,231 @@
+<?php
+include_once "../inc/top.php";
+include_once "../ad/ad_top.php";
+
+	$qry_001  = " SELECT t1.*, t2.PHYSICAL_NAME ";
+	$qry_001 .= " FROM {$TB_AD} t1 ";
+	$qry_001 .= " LEFT JOIN {$TB_ATTECH_FILES} t2 ON (t1.AD_CODE = t2.REFERENCE_CODE) ";
+    $qry_001 .= " WHERE AD_STATUS = 'y' AND AD_TYPE = '3' ";
+    $qry_001 .= " ORDER BY t1.IDX DESC ";
+	$res_001  = $db->exec_sql($qry_001);
+	
+?>
+<!-- 본문 시작 -->
+<div class="container_wrap2">
+    <?php include_once "../inc/header.php"; ?>
+    <!-- container start -->
+    <div class="container">
+        <div class="content">
+			<div class="subsecNt">
+				<!-- <div class="ep_slide">
+					<div class="swiper-wrapper">
+<?php
+    while($row_001  = $db->sql_fetch_array($res_001)) {
+?>
+                        <div class="swiper-slide" style="background-image:url('../../_core/_files/ad/<?=$row_001["PHYSICAL_NAME"]?>');"></div>
+<?
+    }
+?>
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>-->
+				<div class="video_wrap">
+					<video autoplay loop id="myVideo">
+						<!--source src="../movie/bns_movie.mp4" type="video/mp4"-->
+					</video>
+				</div>
+			</div>
+			<div class="subcoNt greenBg">
+				<div class="section_wrap fixed">
+					<h2 class="padzero">기다려 본 경험이 있다면 <em>e약방의 서비스</em>를 경험해 보세요</h2>
+					<h3>1. 기다림이 없다. - 스마트 처방조제 서비스</h3>
+					<div class="imgico">
+						<img src="../images/sub_img01.png" alt="시간아이콘 이미지">
+					</div>
+					<div class="imgsTxx">
+						<p><em class="greenTx">처방전 내역</em> 또는 <em class="greenTx">QR코드</em>를 찍어서 <em class="greenTx">약국에 미리 전송</em>하고 결제후</p> 
+            <p><em class="greenTx">편한시간에 방문</em>하여 약을 찾는 <em class="greenTx">스마트 조제서비스</em>입니다 </p>
+					</div>
+					<h4>서비스 이용대상</h4>
+					<ul class="service_List">
+						<li><span>점심시간을 이용하여 진료받는 바쁜 직장인</span></li>
+						<li><span>약국에서 기다리지 않고 빠른 처방약 조제를 원하시는 분</span></li>
+						<li><span>정형외과 등에서 2차 치료를 받는 환자</span></li>
+                        <li><span>(물리치료 전에 처방전송)</span></li>
+						<!--<li><span>처방전 접수, 입력, 수납을 원스톱으로하여 조제업무를 하고싶은 약사님</span></li>-->
+                        <li><span>감기, 눈병 등 약국에서 2차 감염이 우려스러운 분</span></li>
+						<!--<li><span>스마트 처방조제서비스를 통해 환자 편의성을 제공하고자 하는 전문병원</span></li>-->
+                        <li><span>온라인으로 처방전을 접수하고 편한 시간에 약을 찾고 싶으신 분</span></li>
+					</ul>
+					<h4>서비스 이용방법</h4>
+					<ul class="service_icoN">
+						<li>
+							<div class="icoNimg">
+								<img src="../images/sub_img02.png" alt="1.APP을 설치한다 아이콘 이미지">
+							</div>
+							<p class="icotxx">1. APP을 설치한다.</p>
+						</li>
+						<li>
+							<div class="icoNimg">
+								<img src="../images/sub_img03.png" alt="2.처방전의 처방내역을 촬영하거나 처방 QR 코드를 촬영한다 아이콘 이미지">
+							</div>
+							<p class="icotxx">2. 처방전의 처방내역을 촬영하거나<br/>처방 QR 코드를 촬영한다.</p>
+						</li>
+						<li>
+							<div class="icoNimg">
+								<img src="../images/sub_img04.png" alt="3.가까운 약국에 처방내역을 전송 아이콘 이미지">
+							</div>
+							<p class="icotxx">3. 가까운 약국에 처방내역을 전송.</p>
+						</li>
+						<li>
+							<div class="icoNimg">
+								<img src="../images/sub_img05.png" alt="4.응답된 약국에 조제료를 온라인 결제한다 아이콘 이미지">
+							</div>
+							<p class="icotxx">4. 응답된 약국에 조제료를 온라인 결제한다.</p>
+						</li>
+						<li>
+							<div class="icoNimg">
+								<img src="../images/sub_img06.png" alt="5.조제완료 응답확인한다 아이콘 이미지">
+							</div>
+							<p class="icotxx">5. 조제완료 응답확인한다.</p>
+						</li>
+						<li>
+							<div class="icoNimg">
+								<img src="../images/sub_img07.png" alt="6.방문하여 약을 찾는다 아이콘 이미지">
+							</div>
+							<p class="icotxx">6. 방문하여 약을 찾는다.</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="subcoNt">
+				<div class="section_wrap">
+					<h3>2. 가까운 약국이 어디있나? - 약국 찾기</h3>
+					<div class="imgico">
+						<img src="../images/sub_img08.png" alt="가까운약국 찾기 아이콘 이미지">
+					</div>
+					<div class="imgsTxx black">
+						<p><em class="bigtx">약국 찾기 서비스란,</em></p>
+						<p>GPS로 <em class="greenTx">현재 위치에서 가장 가까운 약국</em>을 찾아 주는 서비스 입니다.</p>
+					</div>
+					<h4 class="colorTxx">서비스 이용대상</h4>
+					<ul class="service_List black">
+						<li><span>주변 처방조제 가능한 약국을 확인하고 싶으신 분</span></li>
+            <li><span>빠른 처방조제 가능한 약국을 찾고 싶으신 분</span></li>
+						<li><span>낯선지역의 가까운 약국을 확인해야 하는 분</span></li>
+					</ul>
+					<h4 class="colorTxx">서비스 이용방법</h4>
+					<ul class="service_icoN white">
+						<li>
+							<div class="icoNimg">
+								<img src="../images/sub_img02.png" alt="1.APP을 설치한다 아이콘 이미지">
+							</div>
+							<p class="icotxx">1. APP을 설치한다.</p>
+						</li>
+						<li>
+							<div class="icoNimg">
+								<img src="../images/sub_img09.png" alt="2.약국 찾기를 실행한다 아이콘 이미지">
+							</div>
+							<p class="icotxx">2. 약국 찾기를 실행한다.</p>
+						</li>
+						<li>
+							<div class="icoNimg">
+								<img src="../images/sub_img10.png" alt="3.지도로 찾기 or 가까운 약국 목록으로 찾기를 이용한다 아이콘 이미지">
+							</div>
+							<p class="icotxx">3. 가까운 약국 목록(또는 지도형)으로<br/>찾기를 이용한다.</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="subcoNt greenBg">
+				<div class="section_wrap">
+					<h3>3. 조제된 약품의 효능은 무엇일까? - 약품 찾기</h3>
+					<div class="imgico">
+						<img src="../images/sub_img11.png" alt="조재된 약품의 효능아이콘 이미지">
+					</div>
+					<div class="imgsTxx">
+						<p><em class="bigtx">약품 찾기 서비스란,</em></p>
+						<p>약 이름을 입력하면 <em class="greenTx">약품의 성분, 효능, 효과, 금기사항, 상세복용법</em>등을 찾아 주는 검색서비스 입니다.</p>
+					</div>
+					<h4>서비스 이용대상</h4>
+					<ul class="service_List">
+						<li><span>약품의 성분, 효능, 효과, 금기사항 등을 알고 싶은 분</span></li>
+            <li><span>처방받은 약의 상세복용방법에 대해 알고 싶은 분</span></li>
+						<li><span>영양제 등에 대한 객관적이고 정확한 정보를 알고 싶은 분</span></li>
+					</ul>
+					<h4>서비스 이용방법</h4>
+					<ul class="service_icoN">
+						<li>
+							<div class="icoNimg">
+								<img src="../images/sub_img02.png" alt="1.APP을 설치한다 아이콘 이미지">
+							</div>
+							<p class="icotxx">1. APP을 설치한다.</p>
+						</li>
+						<li>
+							<div class="icoNimg">
+								<img src="../images/sub_img09.png" alt="2. 약국 찾기를 실행한다 아이콘 이미지">
+							</div>
+							<p class="icotxx">2. 약품 찾기를 실행한다.</p>
+						</li>
+						<li>
+							<div class="icoNimg">
+								<img src="../images/sub_img12.png" alt="3.검색된 약품의 정보를 확인한다 아이콘 이미지">
+							</div>
+							<p class="icotxx">3. 검색된 약품의 정보를 확인한다.</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="subcoNt">
+				<div class="section_wrap">
+					<h3>4. 이 약품은 괜찮나요? 약사님! - 전문약사 상담</h3>
+					<div class="imgico">
+						<img src="../images/sub_img13.png" alt="약사 상담 아이콘 이미지">
+					</div>
+					<div class="imgsTxx black">
+						<p><em class="bigtx">전문약사 상담 서비스란,</em></p>
+						<p>전문약사님들에게 처방받은 약 또는 일반의약품에 대한 상담을 받을 수 있으며 상담 후 멘토로 연결되어 지속적이고 체계적인 복용약에 대한 상담을 받을 수 있는 서비스입니다.</p>
+					</div>
+					<h4 class="colorTxx">서비스 이용대상</h4>
+					<ul class="service_List black">
+						<li><span>복약 상담이 필요하신 분</span></li>
+            <li><span>내게 맞는 영양제를 추천받고 싶으신분</span></li>
+						<li><span>전문약사님을 멘토로 연결하고 싶으신분</span></li>
+					</ul>
+					<h4 class="colorTxx">서비스 이용방법</h4>
+					<ul class="service_icoN white">
+						<li>
+							<div class="icoNimg">
+								<img src="../images/sub_img02.png" alt="1.APP을 설치한다 아이콘 이미지">
+							</div>
+							<p class="icotxx">1. APP을 설치한다.</p>
+						</li>
+						<li>
+							<div class="icoNimg">
+								<img src="../images/sub_img14.png" alt="2.약사 상담 메뉴를 클릭하여 상담내용을 입력한다 아이콘 이미지">
+							</div>
+							<p class="icotxx">2. 상담내용을 입력한다.</p>
+						</li>
+						<li>
+							<div class="icoNimg">
+								<img src="../images/sub_img15.png" alt="3.상담내용의 답변을 확인한다 아이콘 이미지">
+							</div>
+							<p class="icotxx">3. 상담내용의 답변을 확인한다.</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+
+            
+
+        </div>
+        <?php include_once "../inc/footer.php"; ?>
+    </div>
+</div>
+
+<?php
+include_once "../inc/bottom.php";

@@ -1,0 +1,143 @@
+<?php
+include_once "../../_core/_init.php";
+include_once "../inc/top.php";
+include_once "../ad/ad_top.php";
+
+// 페이징 변수
+$offset = 20;
+$page_block = 10;
+$startNum = "";
+$totalnum = "";
+$page = "";
+$page = isNull($_REQUEST["page"]) ? 0 : $_REQUEST["page"];
+
+if (!isNull($page)) {
+    $startNum = ($page - 1) * $offset;
+} else {
+    $page = 1;
+    $startNum = 0;
+}
+
+// 검색 변수
+$search = array();
+$search["stype"] = isNull($_GET["search_type"]) ? "" : $_GET["search_type"];
+
+// 타입 검색
+if(!isNull($search["stype"])) {
+  $where_array[] = "t1.F_TYPE = '{$search["stype"]}'";
+}else{
+  $class = "class='on'";
+}
+
+// 쿼리문 작성
+$qry_where = count($where_array) ? " WHERE " . implode(' AND ', $where_array) : "";
+
+$qry_001   = " SELECT count(*) ";
+
+$qry_from  = " FROM {$TB_FAQ} t1 ";
+$qry_from .= " LEFT JOIN {$TB_CODE} t2 ON (t1.F_TYPE = t2.CD_KEY) ";
+
+$qry_order = " ORDER BY ORDER_SEQ ";
+$qry_limit = " LIMIT " . $startNum . "," . $offset;
+
+$res_001 = $db->exec_sql($qry_001 . $qry_from . $qry_where);
+$row_001 = $db->sql_fetch_row($res_001);
+$totalnum = $row_001[0];
+
+$_opt = "&search_type=" . $search["stype"];
+?>
+<!-- 본문 시작 -->
+<div class="container_wrap2">
+    <?php include_once "../inc/header.php"; ?>
+    <!-- container start -->
+    <div class="container">
+        <div class="content">
+			
+			<div class="subsecNt greenBg">
+				<div class="subsection_wrap">
+					<div class="topimGsec">
+						<img src="../images/subsecNtimg.png" alt="서브 상단 타이틀 이미지">
+					</div>
+				</div>
+			</div>
+			<div class="subsecNt">
+				<div class="subsection_wrap">
+					<div class="top_Location">
+						<span>HOME</span>
+						<span>FAQ</span>
+					</div>
+					<div class="subhtit_wrap">
+						<p class="topsuTxx">FAQ</p>
+						<h2>자주하는 질문</h2>
+					</div>
+					<ul class="etabcoM">
+            <li><a href="./faq.html" <?=$class?>> 전체 </a></li>
+            <?php            
+            $qry_type  = " SELECT * ";
+            $qry_type .= " FROM {$TB_CODE} ";
+            $qry_type .= " WHERE CD_STATUS = 'y' ";
+            $qry_type .= " AND CD_TYPE = 'FAQ' ";
+            $qry_type .= " ORDER BY ORDER_SEQ ";
+            
+            $res_type = $db->exec_sql($qry_type);
+            while($row_type = $db->sql_fetch_array($res_type)){
+              
+              $cd_title = clear_escape($row_type["CD_TITLE"]);
+              $class = $search["stype"] == $row_type["CD_KEY"] ? "class='on'" : "";
+              
+              ?><li><a href="./faq.html?search_type=<?=$row_type["CD_KEY"]?>" <?= $class ?>> <?= $cd_title ?> </a></li><?
+
+            }
+            ?>
+					</ul>
+					<div class="subincoNt">
+						<ul class="slideMenu">
+            <?php
+            if ($totalnum > 0) {
+
+              $qry_002  = " SELECT t1.*, t2.CD_TITLE ";
+              $res_002 = $db->exec_sql($qry_002 . $qry_from . $qry_where . $qry_order . $qry_limit);
+
+              while($row_002 = $db->sql_fetch_array($res_002)){
+                
+                $f_question = clear_escape($row_002["F_QUESTION"]);
+                $f_answer = nl2br(clear_escape($row_002["F_ANSWER"]));
+                
+                ?>
+                <li>
+                  <a href="javascript:void(0);" class="showclick"><?= $f_question ?></a>
+                  <div class="showDiv">
+                    <?= $f_answer ?>
+                  </div>
+                </li>
+                <?
+              }
+
+            } else {
+
+              ?>
+              <div style="width:100%;text-align:center;padding-top:100px;">등록된 자주하는 질문이 없습니다.</div>
+              <?
+
+
+            }
+            ?>
+						</ul>
+					</div>
+          <div id="Paser" style="width:100%;text-align:center;">
+          <?php
+          $paging = new paging_front("./faq.html", "", $offset, $page_block, $totalnum, $page, $_opt);
+          $paging->pagingArea("", "");
+          ?>
+          </div><br><br><br>
+				</div>
+			
+			</div>
+
+        </div>
+        <?php include_once "../inc/footer.php"; ?>
+    </div>
+</div>
+
+<?php
+include_once "../inc/bottom.php";

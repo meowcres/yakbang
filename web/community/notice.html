@@ -1,0 +1,161 @@
+<?php
+include_once "../../_core/_init.php";
+include_once "../inc/top.php";
+include_once "../ad/ad_top.php";
+
+// 페이징 변수
+$offset = 20;
+$page_block = 10;
+$startNum = "";
+$totalnum = "";
+$page = "";
+$page = isNull($_REQUEST["page"]) ? 0 : $_REQUEST["page"];
+
+
+if (!isNull($page)) {
+    $startNum = ($page - 1) * $offset;
+} else {
+    $page = 1;
+    $startNum = 0;
+}
+
+// 검색 변수
+$search = array();
+$search["stype"] = isNull($_GET["search_type"]) ? "" : $_GET["search_type"];
+
+
+// 타입 검색
+if (!isNull($search["stype"])) {
+    $where_array[] = "t1.N_TYPE='{$search["stype"]}'";
+} else {
+    $class = "class = 'on'";
+}
+
+// 쿼리 조건절
+$qry_where = count($where_array) ? " WHERE " . implode(' AND ', $where_array) : "";
+$qry_order = " ORDER BY ORDER_SEQ ASC ";
+$qry_limit = " LIMIT " . $startNum . "," . $offset;
+
+// 목록수
+$qry_001 = " SELECT           ";
+$qry_001 .= " count(*)         ";
+
+$qry_from = " FROM {$TB_NOTICE} t1 ";
+$qry_from .= " LEFT JOIN {$TB_CODE} t2 ON (t1.N_TYPE = t2.CD_KEY) ";
+
+$res_001 = $db->exec_sql($qry_001 . $qry_from . $qry_where);
+$row_001 = $db->sql_fetch_row($res_001);
+$totalnum = $row_001[0];
+
+// 주소이동변수
+$_opt = "&search_type=" . $search["stype"];
+
+?>
+    <!-- 본문 시작 -->
+    <div class="container_wrap2">
+        <?php include_once "../inc/header.php"; ?>
+        <!-- container start -->
+        <div class="container">
+            <div class="content">
+
+                <div class="subsecNt gradientcolor">
+                    <div class="subsection_wrap">
+                        <div class="topimGsec">
+                            <img src="../images/subsecNtimg.png" alt="서브 상단 타이틀 이미지">
+                        </div>
+                    </div>
+                </div>
+                <div class="subsecNt">
+                    <div class="subsection_wrap">
+                        <div class="top_Location">
+                            <span>HOME</span>
+                            <span>NOTICE</span>
+                        </div>
+                        <div class="subhtit_wrap">
+                            <p class="topsuTxx">NOTICE</p>
+                            <h2>공지사항</h2>
+                        </div>
+                        <ul class="etabcoM">
+                            <li><a href="notice.html" <?= $class ?>>전체</a></li>
+                            <?php
+                            $n_qry = " SELECT * ";
+                            $n_qry .= " FROM {$TB_CODE} ";
+                            $n_qry .= " WHERE CD_STATUS = 'y' AND CD_TYPE='NOTICE' ";
+                            $n_qry .= " ORDER BY ORDER_SEQ ";
+                            $n_res = $db->exec_sql($n_qry);
+
+                            while ($n_row = $db->sql_fetch_array($n_res)) {
+
+                                $cd_title = clear_escape($n_row["CD_TITLE"]);
+
+                                $class = $search["stype"] == $n_row["CD_KEY"] ? "class='on'" : "";
+
+                                ?>
+                                <li>
+                                <a href="notice.html?search_type=<?= $n_row["CD_KEY"] ?>" <?= $class ?>> <?= $cd_title ?> </a>
+                                </li><?
+                            }
+                            ?>
+                        </ul>
+
+                        <div class="subincoNt">
+                            <div class="eTbl_wrap">
+                                <div class="eTbl_head">
+                                    <span class="first-child">No</span>
+                                    <span class="second-child">제목</span>
+                                    <span class="third-child">등록일</span>
+                                </div>
+                                <ul>
+                                    <?php
+                                    if ($totalnum > 0) {
+                                        $n_qry = " SELECT t1.*, t2.CD_TITLE ";
+                                        $n_res = $db->exec_sql($n_qry . $qry_from . $qry_where . $qry_order . $qry_limit);
+
+                                        $_j = 1;
+                                        while ($n_row = $db->sql_fetch_array($n_res)) {
+
+
+                                            $_jul = $startNum + $_j;
+
+                                            $idx = $n_row["IDX"];
+                                            $n_title = clear_escape($n_row["N_TITLE"]);
+                                            $reg_date = clear_escape($n_row["REG_DATE"]);
+                                            ?>
+
+                                            <li>
+                                                <span class="first-child center"><?= $_jul ?></span>
+                                                <a href="./notice_view.html?idx=<?= $idx ?>&search_type=<?= $search["type"] ?>&page=<?= $page ?>" class="second-child pL30"><?= $n_title ?></a>
+                                                <span class="third-child center"><?= $reg_date ?></span>
+                                            </li>
+                                            <?
+                                            $_j++;
+                                        }
+                                    } else {
+                                        ?>
+                                        <div style="width:100%;text-align:center;padding-top:100px;">등록된 공지사항이 없습니다.
+                                        </div>
+                                        <?
+                                    }
+                                    ?>
+
+                                </ul>
+                            </div>
+                            <br><br><br>
+                            <div id="Paser">
+                                <?php
+                                $paging = new paging_front("./notice.html", "", $offset, $page_block, $totalnum, $page, $_opt);
+                                $paging->pagingArea("", "");
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <?php include_once "../inc/footer.php"; ?>
+        </div>
+    </div>
+
+<?php
+include_once "../inc/bottom.php";
